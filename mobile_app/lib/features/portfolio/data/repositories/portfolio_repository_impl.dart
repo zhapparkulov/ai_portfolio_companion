@@ -1,10 +1,10 @@
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/repositories/portfolio_repository.dart';
-import '../datasources/portfolio_mock_datasource.dart';
+import '../datasources/portfolio_remote_datasource.dart';
 
 class PortfolioRepositoryImpl implements PortfolioRepository {
-  final PortfolioMockDataSource _dataSource;
+  final PortfolioRemoteDataSource _dataSource;
 
   PortfolioRepositoryImpl(this._dataSource);
 

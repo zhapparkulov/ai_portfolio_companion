@@ -10,7 +10,7 @@ import '../../features/chat/data/datasources/chat_remote_datasource.dart';
 import '../../features/chat/data/repositories/chat_repository_impl.dart';
 import '../../features/chat/domain/repositories/chat_repository.dart';
 import '../../features/chat/domain/usecases/send_message_stream.dart';
-import '../../features/portfolio/data/datasources/portfolio_mock_datasource.dart';
+import '../../features/portfolio/data/datasources/portfolio_remote_datasource.dart';
 import '../../features/portfolio/data/repositories/portfolio_repository_impl.dart';
 import '../../features/portfolio/domain/repositories/portfolio_repository.dart';
 import '../../features/portfolio/domain/usecases/get_portfolio.dart';
@@ -30,8 +30,8 @@ void configureDependencies() {
   );
 
   // Data sources
-  sl.registerLazySingleton<PortfolioMockDataSource>(
-    () => PortfolioMockDataSource(),
+  sl.registerLazySingleton<PortfolioRemoteDataSource>(
+    () => PortfolioRemoteDataSource(sl<Dio>()),
   );
   sl.registerLazySingleton<ChatRemoteDataSource>(
     () => ChatRemoteDataSource(sl<SseClient>()),
@@ -42,7 +42,7 @@ void configureDependencies() {
 
   // Repositories
   sl.registerLazySingleton<PortfolioRepository>(
-    () => PortfolioRepositoryImpl(sl<PortfolioMockDataSource>()),
+    () => PortfolioRepositoryImpl(sl<PortfolioRemoteDataSource>()),
   );
   sl.registerLazySingleton<ChatRepository>(
     () => ChatRepositoryImpl(sl<ChatRemoteDataSource>()),
