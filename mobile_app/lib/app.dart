@@ -6,6 +6,8 @@ import 'core/theme/app_theme.dart';
 import 'features/chat/domain/usecases/send_message_stream.dart';
 import 'features/chat/presentation/cubit/chat_cubit.dart';
 import 'features/chat/presentation/pages/chat_page.dart';
+import 'features/insights/domain/usecases/get_insights.dart';
+import 'features/insights/presentation/cubit/insights_cubit.dart';
 import 'features/insights/presentation/pages/insights_page.dart';
 import 'features/portfolio/domain/usecases/get_portfolio.dart';
 import 'features/portfolio/presentation/cubit/portfolio_cubit.dart';
@@ -80,7 +82,10 @@ class _AppShellState extends State<_AppShell> {
           create: (_) => ChatCubit(sl<SendMessageStream>()),
           child: ChatPage(onTabSelected: _selectTab),
         ),
-      AppTab.insights => InsightsPage(onTabSelected: _selectTab),
+      AppTab.insights => BlocProvider(
+          create: (_) => InsightsCubit(sl<GetInsights>())..load(),
+          child: InsightsPage(onTabSelected: _selectTab),
+        ),
     };
   }
 }

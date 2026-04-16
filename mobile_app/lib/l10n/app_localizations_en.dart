@@ -118,39 +118,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatEmptyMessageError => 'Message cannot be empty.';
 
   @override
-  String get mockRiskResponse1 => 'Your portfolio is currently ';
-
-  @override
-  String get mockRiskResponse2 => '65% tech-heavy. ';
-
-  @override
-  String get mockRiskResponse3 =>
-      'AAPL and NVDA are driving most of the upside, ';
-
-  @override
-  String get mockRiskResponse4 =>
-      'but your downside risk is concentrated in one sector. ';
-
-  @override
-  String get mockRiskResponse5 =>
-      'Consider shifting 7% toward healthcare or dividend-income assets.';
-
-  @override
-  String get mockDefaultResponse1 => 'Your portfolio is up today, ';
-
-  @override
-  String get mockDefaultResponse2 =>
-      'with broad strength in mega-cap technology. ';
-
-  @override
-  String get mockDefaultResponse3 =>
-      'The AI recommendation is to keep winners, ';
-
-  @override
-  String get mockDefaultResponse4 =>
-      'but rebalance gradually if tech exposure moves above your target range.';
-
-  @override
   String get portfolioInsights => 'Portfolio Insights';
 
   @override

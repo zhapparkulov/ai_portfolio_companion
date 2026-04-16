@@ -308,60 +308,6 @@ abstract class AppLocalizations {
   /// **'Message cannot be empty.'**
   String get chatEmptyMessageError;
 
-  /// No description provided for @mockRiskResponse1.
-  ///
-  /// In en, this message translates to:
-  /// **'Your portfolio is currently '**
-  String get mockRiskResponse1;
-
-  /// No description provided for @mockRiskResponse2.
-  ///
-  /// In en, this message translates to:
-  /// **'65% tech-heavy. '**
-  String get mockRiskResponse2;
-
-  /// No description provided for @mockRiskResponse3.
-  ///
-  /// In en, this message translates to:
-  /// **'AAPL and NVDA are driving most of the upside, '**
-  String get mockRiskResponse3;
-
-  /// No description provided for @mockRiskResponse4.
-  ///
-  /// In en, this message translates to:
-  /// **'but your downside risk is concentrated in one sector. '**
-  String get mockRiskResponse4;
-
-  /// No description provided for @mockRiskResponse5.
-  ///
-  /// In en, this message translates to:
-  /// **'Consider shifting 7% toward healthcare or dividend-income assets.'**
-  String get mockRiskResponse5;
-
-  /// No description provided for @mockDefaultResponse1.
-  ///
-  /// In en, this message translates to:
-  /// **'Your portfolio is up today, '**
-  String get mockDefaultResponse1;
-
-  /// No description provided for @mockDefaultResponse2.
-  ///
-  /// In en, this message translates to:
-  /// **'with broad strength in mega-cap technology. '**
-  String get mockDefaultResponse2;
-
-  /// No description provided for @mockDefaultResponse3.
-  ///
-  /// In en, this message translates to:
-  /// **'The AI recommendation is to keep winners, '**
-  String get mockDefaultResponse3;
-
-  /// No description provided for @mockDefaultResponse4.
-  ///
-  /// In en, this message translates to:
-  /// **'but rebalance gradually if tech exposure moves above your target range.'**
-  String get mockDefaultResponse4;
-
   /// No description provided for @portfolioInsights.
   ///
   /// In en, this message translates to:

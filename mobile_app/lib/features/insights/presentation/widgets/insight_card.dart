@@ -8,8 +8,7 @@ import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_badge.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
-
-enum InsightSeverity { priority, info, positive, risk }
+import '../../domain/entities/insight_severity.dart';
 
 class InsightCard extends StatelessWidget {
   final String title;

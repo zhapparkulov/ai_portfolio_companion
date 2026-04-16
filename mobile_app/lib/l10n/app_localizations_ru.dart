@@ -117,37 +117,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get chatEmptyMessageError => 'Сообщение не может быть пустым.';
 
   @override
-  String get mockRiskResponse1 => 'Ваш портфель сейчас ';
-
-  @override
-  String get mockRiskResponse2 => 'на 65% сконцентрирован в tech. ';
-
-  @override
-  String get mockRiskResponse3 => 'AAPL и NVDA дают большую часть роста, ';
-
-  @override
-  String get mockRiskResponse4 =>
-      'но риск снижения сосредоточен в одном секторе. ';
-
-  @override
-  String get mockRiskResponse5 =>
-      'Рассмотрите перенос 7% в healthcare или дивидендные активы.';
-
-  @override
-  String get mockDefaultResponse1 => 'Сегодня портфель растет, ';
-
-  @override
-  String get mockDefaultResponse2 => 'особенно за счет крупных tech-компаний. ';
-
-  @override
-  String get mockDefaultResponse3 =>
-      'AI-рекомендация — удерживать победителей, ';
-
-  @override
-  String get mockDefaultResponse4 =>
-      'но постепенно ребалансировать, если tech превысит целевой диапазон.';
-
-  @override
   String get portfolioInsights => 'Инсайты портфеля';
 
   @override
