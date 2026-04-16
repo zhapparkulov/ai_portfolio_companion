@@ -17,8 +17,7 @@ class HoldingModel extends Holding {
         quantity: (json['quantity'] as num).toDouble(),
         avgPrice: (json['avg_price'] as num).toDouble(),
         currentPrice: (json['current_price'] as num).toDouble(),
-        dailyChangePercent:
-            (json['daily_change_percent'] as num).toDouble(),
+        dailyChangePercent: (json['daily_change_percent'] as num).toDouble(),
       );
 
   Map<String, dynamic> toJson() => {

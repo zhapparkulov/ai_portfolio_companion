@@ -7,8 +7,8 @@ class Formatters {
   static final NumberFormat _currency =
       NumberFormat.currency(locale: 'en_US', symbol: r'$');
 
-  static final NumberFormat _percent =
-      NumberFormat.decimalPattern('en_US')..minimumFractionDigits = 2;
+  static final NumberFormat _percent = NumberFormat.decimalPattern('en_US')
+    ..minimumFractionDigits = 2;
 
   static String currency(double value) => _currency.format(value);
 
