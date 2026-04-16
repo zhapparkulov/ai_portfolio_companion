@@ -62,3 +62,36 @@
 
 Следующий шаг:
 - Когда backend `GET /v1/insights` будет готов, заменить `InsightsMockDataSource` на remote datasource за тем же repository contract.
+
+## 2026-04-17 — FastAPI backend endpoints v1
+
+Что сделано:
+- Поднят backend skeleton по `docs/ARCHITECTURE.md`: `app/main.py`, `api/v1`, `routes`, `schemas`, `services`, `repositories`, `data`.
+- Добавлен `POST /v1/chat/stream` с `StreamingResponse` и SSE contract `data: {"chunk": ...}` / `data: {"done": true}`.
+- Добавлен `GET /v1/portfolio` с mock snapshot портфеля.
+- Добавлен `GET /v1/insights`, который строит mock insight cards на основе portfolio data.
+- Добавлены `requirements.txt`, `.env.example`, backend `.gitignore` и README с командами запуска.
+- Добавлены endpoint tests для chat, portfolio и insights.
+
+Затронутые области:
+- `backend/app/main.py`
+- `backend/app/api/v1/**`
+- `backend/app/schemas/**`
+- `backend/app/services/**`
+- `backend/app/repositories/**`
+- `backend/app/data/mock_data.py`
+- `backend/tests/**`
+- `backend/requirements.txt`
+- `backend/README.md`
+
+Решения:
+- Chat backend пока использует mock generator, но уже соблюдает SSE-протокол, который ожидает Flutter.
+- Portfolio и insights читают mock data через repository/service boundaries, чтобы позже заменить источник данных без изменения routes.
+- Backend оставлен совместимым с Python 3.9: используются `Optional[...]` вместо `str | None`.
+
+Проверки:
+- `PYTHONPYCACHEPREFIX=/tmp/ai_portfolio_pycache .venv/bin/python -m compileall app tests`
+- `.venv/bin/python -m pytest tests` — 4 passed
+
+Следующий шаг:
+- Подключить Flutter `portfolio` к `GET /v1/portfolio` через remote datasource и переключить DI с mock на remote.
