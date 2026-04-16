@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/insights/data/datasources/insights_datasource.dart';
-import '../../features/insights/data/datasources/insights_mock_datasource.dart';
+import '../../features/insights/data/datasources/insights_remote_datasource.dart';
 import '../../features/insights/data/repositories/insights_repository_impl.dart';
 import '../../features/insights/domain/repositories/insights_repository.dart';
 import '../../features/insights/domain/usecases/get_insights.dart';
@@ -43,8 +43,8 @@ Future<void> configureDependencies() async {
   sl.registerLazySingleton<ChatRemoteDataSource>(
     () => ChatRemoteDataSource(sl<SseClient>()),
   );
-  sl.registerLazySingleton<InsightsDataSource>(
-    () => InsightsMockDataSource(),
+  sl.registerLazySingleton<InsightsRemoteDataSource>(
+    () => InsightsRemoteDataSource(sl<Dio>()),
   );
 
   // Repositories
@@ -55,7 +55,7 @@ Future<void> configureDependencies() async {
     () => ChatRepositoryImpl(sl<ChatRemoteDataSource>()),
   );
   sl.registerLazySingleton<InsightsRepository>(
-    () => InsightsRepositoryImpl(sl<InsightsDataSource>()),
+    () => InsightsRepositoryImpl(sl<InsightsRemoteDataSource>()),
   );
 
   // Use cases
