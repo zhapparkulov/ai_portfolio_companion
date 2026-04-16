@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/insights/data/datasources/insights_datasource.dart';
 import '../../features/insights/data/datasources/insights_mock_datasource.dart';
@@ -16,13 +17,19 @@ import '../../features/portfolio/domain/repositories/portfolio_repository.dart';
 import '../../features/portfolio/domain/usecases/get_portfolio.dart';
 import '../network/dio_client.dart';
 import '../network/sse_client.dart';
+import '../config/locale_storage.dart';
 
 /// Service locator. Registrations are kept flat and ordered by layer:
 /// data sources -> repositories -> use cases. Cubits are provided at the
 /// widget tree boundary via BlocProvider, not registered here.
 final GetIt sl = GetIt.instance;
 
-void configureDependencies() {
+Future<void> configureDependencies() async {
+  // Shared Preferences (Storage)
+  final prefs = await SharedPreferences.getInstance();
+  sl.registerLazySingleton<SharedPreferences>(() => prefs);
+  sl.registerLazySingleton<LocaleStorage>(() => LocaleStorage(sl<SharedPreferences>()));
+
   // Network
   sl.registerLazySingleton<Dio>(DioClient.create);
   sl.registerLazySingleton<SseClient>(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/config/locale_storage.dart';
 import 'core/di/injection.dart';
 import 'core/theme/app_theme.dart';
 import 'features/chat/domain/usecases/send_message_stream.dart';
@@ -23,11 +24,18 @@ class AIPortfolioApp extends StatefulWidget {
 }
 
 class _AIPortfolioAppState extends State<AIPortfolioApp> {
-  Locale _locale = const Locale('en');
+  late Locale _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    _locale = sl<LocaleStorage>().getLocale();
+  }
 
   void _changeLocale(Locale locale) {
     if (_locale == locale) return;
     setState(() => _locale = locale);
+    sl<LocaleStorage>().saveLocale(locale);
   }
 
   @override
