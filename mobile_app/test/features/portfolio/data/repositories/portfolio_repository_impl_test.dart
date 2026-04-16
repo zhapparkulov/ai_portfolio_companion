@@ -1,6 +1,6 @@
 import 'package:ai_portfolio_companion/core/error/exceptions.dart';
 import 'package:ai_portfolio_companion/core/error/failures.dart';
-import 'package:ai_portfolio_companion/features/portfolio/data/datasources/portfolio_mock_datasource.dart';
+import 'package:ai_portfolio_companion/features/portfolio/data/datasources/portfolio_datasource.dart';
 import 'package:ai_portfolio_companion/features/portfolio/data/models/portfolio_model.dart';
 import 'package:ai_portfolio_companion/features/portfolio/data/repositories/portfolio_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -39,7 +39,7 @@ void main() {
   });
 }
 
-class _SuccessDataSource extends PortfolioMockDataSource {
+class _SuccessDataSource implements PortfolioDataSource {
   @override
   Future<PortfolioModel> fetchPortfolio() async {
     return PortfolioModel.fromJson(const {
@@ -60,7 +60,7 @@ class _SuccessDataSource extends PortfolioMockDataSource {
   }
 }
 
-class _ThrowingDataSource extends PortfolioMockDataSource {
+class _ThrowingDataSource implements PortfolioDataSource {
   final Object error;
 
   _ThrowingDataSource(this.error);

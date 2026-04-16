@@ -1,10 +1,12 @@
 import '../models/portfolio_model.dart';
 
+import 'portfolio_datasource.dart';
+
 /// Mock data source. Stands in for a real remote data source while the
 /// FastAPI backend is developed in parallel. The JSON contract matches
 /// `GET /v1/portfolio` in docs/ARCHITECTURE.md §6, so when the real
 /// data source lands the repository will not change.
-class PortfolioMockDataSource {
+class PortfolioMockDataSource implements PortfolioDataSource {
   Future<PortfolioModel> fetchPortfolio() async {
     // Simulate network latency so the UI loading state is exercised.
     await Future.delayed(const Duration(milliseconds: 600));

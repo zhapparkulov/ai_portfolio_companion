@@ -32,3 +32,15 @@ cd mobile_app
 flutter pub get
 flutter run
 ```
+
+## Запуск FastAPI-бэкенда
+
+Для локального запуска бэкенда потребуется Python (рекомендуется 3.9+).
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # Для Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```

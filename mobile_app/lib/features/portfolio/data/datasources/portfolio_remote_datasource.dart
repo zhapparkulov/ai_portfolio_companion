@@ -3,8 +3,9 @@ import 'package:dio/dio.dart';
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/error/exceptions.dart';
 import '../models/portfolio_model.dart';
+import 'portfolio_datasource.dart';
 
-class PortfolioRemoteDataSource {
+class PortfolioRemoteDataSource implements PortfolioDataSource {
   final Dio _dio;
 
   const PortfolioRemoteDataSource(this._dio);
