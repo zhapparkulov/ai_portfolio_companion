@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/di/injection.dart';
 import 'core/theme/app_theme.dart';
+import 'features/chat/domain/usecases/send_message_stream.dart';
+import 'features/chat/presentation/cubit/chat_cubit.dart';
 import 'features/chat/presentation/pages/chat_page.dart';
 import 'features/insights/presentation/pages/insights_page.dart';
 import 'features/portfolio/domain/usecases/get_portfolio.dart';
@@ -45,7 +47,10 @@ class _AppShellState extends State<_AppShell> {
           create: (_) => PortfolioCubit(sl<GetPortfolio>())..load(),
           child: PortfolioPage(onTabSelected: _selectTab),
         ),
-      AppTab.chat => ChatPage(onTabSelected: _selectTab),
+      AppTab.chat => BlocProvider(
+          create: (_) => ChatCubit(sl<SendMessageStream>()),
+          child: ChatPage(onTabSelected: _selectTab),
+        ),
       AppTab.insights => InsightsPage(onTabSelected: _selectTab),
     };
   }

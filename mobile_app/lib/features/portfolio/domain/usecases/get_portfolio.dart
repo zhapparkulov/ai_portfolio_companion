@@ -5,7 +5,7 @@ import '../repositories/portfolio_repository.dart';
 class GetPortfolio {
   final PortfolioRepository _repository;
 
-  GetPortfolio(this._repository);
+  const GetPortfolio(this._repository);
 
   Future<PortfolioResult> call() => _repository.getPortfolio();
 }

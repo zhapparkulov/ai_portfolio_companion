@@ -6,10 +6,10 @@ import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/app_text_field.dart';
 
-class ChatInput extends StatelessWidget {
+class ChatInput extends StatefulWidget {
   final TextEditingController? controller;
   final bool enabled;
-  final VoidCallback onSend;
+  final ValueChanged<String> onSend;
 
   const ChatInput({
     super.key,
@@ -17,6 +17,30 @@ class ChatInput extends StatelessWidget {
     required this.enabled,
     required this.onSend,
   });
+
+  @override
+  State<ChatInput> createState() => _ChatInputState();
+}
+
+class _ChatInputState extends State<ChatInput> {
+  TextEditingController? _internalController;
+
+  TextEditingController get _controller =>
+      widget.controller ?? (_internalController ??= TextEditingController());
+
+  @override
+  void dispose() {
+    _internalController?.dispose();
+    super.dispose();
+  }
+
+  void _send() {
+    final message = _controller.text.trim();
+    if (message.isEmpty) return;
+
+    widget.onSend(message);
+    _controller.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +55,16 @@ class ChatInput extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AppTextField(
-            controller: controller,
-            enabled: enabled,
-            hintText:
-                enabled ? 'Ask about your investments...' : 'Type a message...',
+            controller: _controller,
+            enabled: widget.enabled,
+            hintText: widget.enabled
+                ? 'Ask about your investments...'
+                : 'Type a message...',
             leadingIcon: Icons.add,
-            trailing: _SendButton(enabled: enabled, onSend: onSend),
+            onSubmitted: (_) => _send(),
+            trailing: _SendButton(enabled: widget.enabled, onSend: _send),
           ),
-          if (!enabled) ...[
+          if (!widget.enabled) ...[
             const SizedBox(height: AppSpacing.xs),
             Text(
               'CHAT SERVICE TEMPORARILY UNAVAILABLE',
