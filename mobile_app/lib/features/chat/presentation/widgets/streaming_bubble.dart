@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../shared/extensions/l10n_extensions.dart';
 
 class StreamingBubble extends StatefulWidget {
   final String text;
 
   const StreamingBubble({
     super.key,
-    this.text = 'Analyzing portfolio risk',
+    this.text = '',
   });
 
   @override
@@ -55,7 +56,12 @@ class _StreamingBubbleState extends State<StreamingBubble>
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(widget.text, style: AppTextStyles.bodySmall),
+                Text(
+                  widget.text.isEmpty
+                      ? context.l10n.analyzingPortfolioRisk
+                      : widget.text,
+                  style: AppTextStyles.bodySmall,
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 AnimatedBuilder(
                   animation: _controller,

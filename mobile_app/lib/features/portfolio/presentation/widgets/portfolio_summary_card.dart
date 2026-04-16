@@ -5,6 +5,7 @@ import '../../../../core/theme/app_radii.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatters.dart';
+import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../domain/entities/portfolio.dart';
 
@@ -36,7 +37,7 @@ class PortfolioSummaryCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'TOTAL BALANCE',
+                  context.l10n.totalBalance,
                   style: AppTextStyles.caption.copyWith(
                     color: AppColors.textInverted.withValues(alpha: 0.52),
                   ),
@@ -51,7 +52,7 @@ class PortfolioSummaryCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  'DAILY CHANGE',
+                  context.l10n.dailyChange,
                   style: AppTextStyles.caption.copyWith(
                     color: AppColors.textInverted.withValues(alpha: 0.45),
                     fontSize: 10,

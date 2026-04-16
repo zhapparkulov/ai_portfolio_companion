@@ -4,6 +4,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_radii.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
 
@@ -122,7 +123,7 @@ class AssistantRiskCard extends StatelessWidget {
               const SizedBox(width: AppSpacing.xs),
               Expanded(
                 child: Text(
-                  'RISK EXPOSURE ALERT',
+                  context.l10n.riskExposureAlert,
                   style: AppTextStyles.caption.copyWith(
                     color: AppColors.primary,
                     fontWeight: FontWeight.w800,
@@ -150,7 +151,7 @@ class AssistantRiskCard extends StatelessWidget {
             children: [
               Expanded(
                 child: AppButton(
-                  label: 'Compare Healthcare ETFs',
+                  label: context.l10n.compareHealthcareEtfs,
                   onPressed: () {},
                   variant: AppButtonVariant.ghost,
                   size: AppButtonSize.small,
@@ -160,7 +161,7 @@ class AssistantRiskCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.xs),
           AppButton(
-            label: 'View AAPL Details',
+            label: context.l10n.viewAaplDetails,
             onPressed: () {},
             variant: AppButtonVariant.ghost,
             size: AppButtonSize.small,
@@ -205,14 +206,14 @@ class ErrorBubble extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Connection lost.',
+                      context.l10n.connectionLost,
                       style: AppTextStyles.title.copyWith(
                         color: AppColors.negative,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.xs),
                     Text(
-                      "We're having trouble reaching the AI assistant.",
+                      context.l10n.connectionLostBody,
                       style: AppTextStyles.bodySmall.copyWith(
                         color: AppColors.negative,
                       ),
@@ -221,7 +222,7 @@ class ErrorBubble extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: AppButton(
-                        label: 'Retry',
+                        label: context.l10n.retry,
                         onPressed: onRetry,
                         variant: AppButtonVariant.danger,
                         size: AppButtonSize.small,

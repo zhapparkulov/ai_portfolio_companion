@@ -5,6 +5,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_radii.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_scaffold.dart';
 import '../../domain/entities/chat_message.dart';
 import '../cubit/chat_cubit.dart';
@@ -28,8 +29,8 @@ class ChatPage extends StatelessWidget {
         final isStreaming = state is ChatStreaming;
 
         return AppScaffold(
-          title: isError ? 'AI Portfolio' : 'AI Assistant',
-          subtitle: isError ? null : 'ACTIVE NOW',
+          title: isError ? context.l10n.aiPortfolio : context.l10n.aiAssistant,
+          subtitle: isError ? null : context.l10n.activeNow,
           selectedTab: AppTab.chat,
           onTabSelected: onTabSelected,
           avatarIcon: isError ? Icons.person : Icons.smart_toy,
@@ -47,7 +48,10 @@ class ChatPage extends StatelessWidget {
             ),
             children: [
               if (!isError) const _DatePill(),
-              ...state.messages.map(_MessageItem.new),
+              if (state.messages.isEmpty)
+                ..._localizedSeedMessages(context).map(_MessageItem.new)
+              else
+                ...state.messages.map(_MessageItem.new),
               if (isStreaming) ...[
                 const SizedBox(height: AppSpacing.xs),
                 const StreamingBubble(),
@@ -104,7 +108,7 @@ class _DatePill extends StatelessWidget {
               vertical: AppSpacing.xxs,
             ),
             child: Text(
-              'TODAY',
+              context.l10n.today,
               style: AppTextStyles.caption.copyWith(
                 color: AppColors.textMuted,
                 fontSize: 10,
@@ -115,4 +119,22 @@ class _DatePill extends StatelessWidget {
       ),
     );
   }
+}
+
+List<ChatMessage> _localizedSeedMessages(BuildContext context) {
+  final now = DateTime.now();
+  return [
+    ChatMessage(
+      id: 'seed-user',
+      role: ChatMessageRole.user,
+      text: context.l10n.seedUserMessage,
+      createdAt: now,
+    ),
+    ChatMessage(
+      id: 'seed-assistant',
+      role: ChatMessageRole.assistant,
+      text: context.l10n.seedAssistantMessage,
+      createdAt: now,
+    ),
+  ];
 }

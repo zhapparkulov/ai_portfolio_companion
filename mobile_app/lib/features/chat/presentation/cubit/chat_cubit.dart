@@ -10,7 +10,7 @@ part 'chat_state.dart';
 class ChatCubit extends Cubit<ChatState> {
   final SendMessageStream _sendMessageStream;
 
-  ChatCubit(this._sendMessageStream) : super(ChatReady(_initialMessages()));
+  ChatCubit(this._sendMessageStream) : super(const ChatReady([]));
 
   Future<void> sendMessage(String text) async {
     final trimmed = text.trim();
@@ -65,24 +65,4 @@ class ChatCubit extends Cubit<ChatState> {
     if (lastUserMessage == null) return;
     sendMessage(lastUserMessage.text);
   }
-}
-
-List<ChatMessage> _initialMessages() {
-  final now = DateTime.now();
-  return [
-    ChatMessage(
-      id: 'seed-user',
-      role: ChatMessageRole.user,
-      text: 'How is my tech exposure looking?',
-      createdAt: now,
-    ),
-    ChatMessage(
-      id: 'seed-assistant',
-      role: ChatMessageRole.assistant,
-      text: 'Your portfolio is currently 65% tech-heavy. While AAPL is '
-          'performing well, you might consider diversifying into healthcare '
-          'to mitigate sector risk.',
-      createdAt: now,
-    ),
-  ];
 }

@@ -4,6 +4,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_radii.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_text_field.dart';
 
 class ChatInput extends StatefulWidget {
@@ -58,8 +59,8 @@ class _ChatInputState extends State<ChatInput> {
             controller: _controller,
             enabled: widget.enabled,
             hintText: widget.enabled
-                ? 'Ask about your investments...'
-                : 'Type a message...',
+                ? context.l10n.askInvestmentsHint
+                : context.l10n.typeMessageHint,
             leadingIcon: Icons.add,
             onSubmitted: (_) => _send(),
             trailing: _SendButton(enabled: widget.enabled, onSend: _send),
@@ -67,7 +68,7 @@ class _ChatInputState extends State<ChatInput> {
           if (!widget.enabled) ...[
             const SizedBox(height: AppSpacing.xs),
             Text(
-              'CHAT SERVICE TEMPORARILY UNAVAILABLE',
+              context.l10n.chatUnavailable,
               style: AppTextStyles.caption.copyWith(
                 color: AppColors.textMuted,
                 fontSize: 10,

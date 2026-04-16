@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_scaffold.dart';
 import '../../../../shared/widgets/empty_state.dart';
 import '../widgets/insight_card.dart';
@@ -19,7 +20,7 @@ class InsightsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Portfolio Insights',
+      title: context.l10n.portfolioInsights,
       selectedTab: AppTab.insights,
       onTabSelected: onTabSelected,
       avatarIcon: Icons.person,
@@ -27,12 +28,11 @@ class InsightsPage extends StatelessWidget {
       body: showEmpty
           ? EmptyState(
               icon: Icons.insights,
-              title: 'Insights',
-              message:
-                  'No insights yet. Your AI assistant is analyzing your portfolio for new opportunities.',
-              actionLabel: 'Refresh Data',
+              title: context.l10n.insightsTitle,
+              message: context.l10n.insightsEmptyMessage,
+              actionLabel: context.l10n.refreshData,
               onAction: () {},
-              statusLabel: 'AI ANALYSIS IN PROGRESS',
+              statusLabel: context.l10n.aiAnalysisInProgress,
             )
           : ListView(
               padding: const EdgeInsets.fromLTRB(
@@ -41,49 +41,41 @@ class InsightsPage extends StatelessWidget {
                 AppSpacing.lg,
                 AppSpacing.xl,
               ),
-              children: const [
-                InsightsHeroCard(),
-                SizedBox(height: AppSpacing.lg),
+              children: [
+                const InsightsHeroCard(),
+                const SizedBox(height: AppSpacing.lg),
                 InsightCard(
-                  title: 'Rebalancing Opportunity',
-                  badgeLabel: 'PRIORITY',
+                  title: context.l10n.rebalancingOpportunity,
+                  badgeLabel: context.l10n.priority,
                   severity: InsightSeverity.priority,
-                  body: 'Your Tech exposure has grown to 42% of your portfolio '
-                      'due to recent rallies. We recommend shifting 7% into '
-                      'Consumer Staples to maintain your target risk level.',
+                  body: context.l10n.rebalancingBody,
                   actions: [
                     InsightActionButton(
-                      label: 'Execute Rebalance',
+                      label: context.l10n.executeRebalance,
                       onPressed: _noop,
                       primary: true,
                     ),
                   ],
                 ),
                 InsightCard(
-                  title: 'Market Trend',
-                  meta: '2h ago',
+                  title: context.l10n.marketTrend,
+                  meta: context.l10n.twoHoursAgo,
                   severity: InsightSeverity.info,
-                  body:
-                      'Recent Fed announcements regarding interest rate holds '
-                      'suggest a stabilizing environment for dividend-income '
-                      'assets. Yields on your Treasury holdings are projected '
-                      'to remain steady.',
-                  highlight: 'Portfolio volatility reduced by 0.4%',
+                  body: context.l10n.marketTrendBody,
+                  highlight: context.l10n.portfolioVolatilityReduced,
                 ),
                 InsightCard(
-                  title: 'Dividend Alert +20.50',
+                  title: context.l10n.dividendAlert,
                   severity: InsightSeverity.positive,
-                  body:
-                      'Three of your core holdings announced upcoming payouts '
-                      'for next Tuesday.',
+                  body: context.l10n.dividendAlertBody,
                   actions: [
                     InsightActionButton(
-                      label: 'Set to Reinvest',
+                      label: context.l10n.setToReinvest,
                       onPressed: _noop,
                       primary: true,
                     ),
                     InsightActionButton(
-                      label: 'View Schedule',
+                      label: context.l10n.viewSchedule,
                       onPressed: _noop,
                     ),
                   ],

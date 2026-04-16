@@ -4,6 +4,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_radii.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_badge.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
@@ -133,7 +134,7 @@ class InsightsHeroCard extends StatelessWidget {
                   color: AppColors.textInverted, size: 16),
               const SizedBox(width: AppSpacing.xs),
               Text(
-                'AI INTELLIGENCE',
+                context.l10n.aiIntelligence,
                 style: AppTextStyles.caption.copyWith(
                   color: AppColors.textInverted.withValues(alpha: 0.58),
                 ),
@@ -142,15 +143,14 @@ class InsightsHeroCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
-            'Optimize for Growth',
+            context.l10n.optimizeForGrowth,
             style: AppTextStyles.heading.copyWith(
               color: AppColors.textInverted,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            "Based on today's market shifts and your risk profile, we've "
-            "identified 3 key actions to enhance your portfolio's performance.",
+            context.l10n.insightsHeroBody,
             style: AppTextStyles.bodySmall.copyWith(
               color: AppColors.textInverted.withValues(alpha: 0.68),
               height: 1.5,

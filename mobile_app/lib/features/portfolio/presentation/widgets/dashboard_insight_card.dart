@@ -4,6 +4,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_radii.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
 
@@ -19,11 +20,10 @@ class DashboardInsightCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('AI Insights', style: AppTextStyles.title),
+          Text(context.l10n.aiInsights, style: AppTextStyles.title),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            'Your portfolio is currently 12% more volatile than last week. '
-            'Consider rebalancing toward more stable sectors.',
+            context.l10n.dashboardInsightBody,
             style: AppTextStyles.bodySmall.copyWith(
               color: AppColors.textSecondary,
               height: 1.45,
@@ -31,7 +31,7 @@ class DashboardInsightCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.md),
           AppButton(
-            label: 'Apply Strategy',
+            label: context.l10n.applyStrategy,
             onPressed: () {},
             variant: AppButtonVariant.secondary,
             size: AppButtonSize.small,

@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../extensions/l10n_extensions.dart';
 import 'app_button.dart';
 import 'app_card.dart';
 
 class ErrorView extends StatelessWidget {
-  final String title;
+  final String? title;
   final String message;
   final VoidCallback onRetry;
 
   const ErrorView({
     super.key,
-    this.title = 'Something went wrong',
+    this.title,
     required this.message,
     required this.onRetry,
   });
@@ -36,7 +37,7 @@ class ErrorView extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
-                title,
+                title ?? context.l10n.somethingWentWrong,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.title.copyWith(
                   color: AppColors.negative,
@@ -50,7 +51,7 @@ class ErrorView extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.md),
               AppButton(
-                label: 'Retry',
+                label: context.l10n.retry,
                 onPressed: onRetry,
                 variant: AppButtonVariant.danger,
                 size: AppButtonSize.small,
