@@ -13,7 +13,7 @@ import '../widgets/chat_input.dart';
 import '../widgets/message_bubble.dart';
 import '../widgets/streaming_bubble.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   final ValueChanged<AppTab> onTabSelected;
 
   const ChatPage({
@@ -22,8 +22,37 @@ class ChatPage extends StatelessWidget {
   });
 
   @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  final ScrollController _scrollController = ScrollController();
+
+  void _scrollToBottom() {
+    if (!_scrollController.hasClients) return;
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ChatCubit, ChatState>(
+    return BlocConsumer<ChatCubit, ChatState>(
+      listener: (context, state) {
+        if (state is ChatStreaming || state is ChatReady) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _scrollToBottom();
+          });
+        }
+      },
       builder: (context, state) {
         final isError = state is ChatError;
         final isStreaming = state is ChatStreaming;
@@ -32,7 +61,7 @@ class ChatPage extends StatelessWidget {
           title: isError ? context.l10n.aiPortfolio : context.l10n.aiAssistant,
           subtitle: isError ? null : context.l10n.activeNow,
           selectedTab: AppTab.chat,
-          onTabSelected: onTabSelected,
+          onTabSelected: widget.onTabSelected,
           avatarIcon: isError ? Icons.person : Icons.smart_toy,
           avatarColor: isError ? AppColors.primary : AppColors.secondary,
           bottomContent: ChatInput(
@@ -40,6 +69,7 @@ class ChatPage extends StatelessWidget {
             onSend: context.read<ChatCubit>().sendMessage,
           ),
           body: ListView(
+            controller: _scrollController,
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.lg,
               AppSpacing.sm,

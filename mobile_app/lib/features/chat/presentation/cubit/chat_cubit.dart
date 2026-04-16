@@ -55,14 +55,22 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   void retryLastMessage() {
-    ChatMessage? lastUserMessage;
-    for (final message in state.messages) {
-      if (message.role == ChatMessageRole.user) {
-        lastUserMessage = message;
-      }
+    if (state is! ChatError) return;
+    
+    final messages = List<ChatMessage>.from(state.messages);
+    
+    if (messages.isNotEmpty && messages.last.role == ChatMessageRole.assistant) {
+      messages.removeLast();
     }
-
-    if (lastUserMessage == null) return;
-    sendMessage(lastUserMessage.text);
+    
+    String? failedText;
+    if (messages.isNotEmpty && messages.last.role == ChatMessageRole.user) {
+      failedText = messages.removeLast().text;
+    }
+    
+    if (failedText == null) return;
+    
+    emit(ChatReady(messages));
+    sendMessage(failedText);
   }
 }
