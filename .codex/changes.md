@@ -95,3 +95,39 @@
 
 Следующий шаг:
 - Подключить Flutter `portfolio` к `GET /v1/portfolio` через remote datasource и переключить DI с mock на remote.
+
+## 2026-04-17 — End-to-end проверка и актуализация README
+
+Что сделано:
+- Проверен живой FastAPI backend на `127.0.0.1:8000`.
+- Подтверждены контракты `GET /health`, `GET /v1/portfolio`, `GET /v1/insights`.
+- Подтвержден SSE-контракт `POST /v1/chat/stream`: backend отдает `data: {"chunk": ...}` и завершает `data: {"done": true}`.
+- Исправлены мелкие Flutter analyzer/test blockers: неиспользуемый import, отсутствующие `@override`, async DI setup в widget test.
+- Обновлены `README.md`, `mobile_app/README.md` и `backend/README.md` под текущее full-stack состояние проекта.
+
+Затронутые области:
+- `README.md`
+- `mobile_app/README.md`
+- `backend/README.md`
+- `mobile_app/lib/core/di/injection.dart`
+- `mobile_app/lib/features/chat/presentation/cubit/chat_cubit.dart`
+- `mobile_app/lib/features/portfolio/data/datasources/portfolio_mock_datasource.dart`
+- `mobile_app/lib/features/portfolio/data/datasources/portfolio_remote_datasource.dart`
+- `mobile_app/test/widget_test.dart`
+
+Решения:
+- Документация теперь описывает реальный запуск Flutter + FastAPI, а не старое состояние с ожидающим backend.
+- Для реального устройства явно задокументирован `--dart-define=API_BASE_URL=http://YOUR_LOCAL_IP:8000/v1`.
+- Widget test теперь поднимает DI асинхронно и переопределяет `GetPortfolio` fake-репозиторием, чтобы не зависеть от backend.
+
+Проверки:
+- `flutter analyze`
+- `flutter test`
+- `.venv/bin/python -m pytest tests`
+- `curl http://127.0.0.1:8000/health`
+- `curl http://127.0.0.1:8000/v1/portfolio`
+- `curl http://127.0.0.1:8000/v1/insights`
+- `curl -N -H "Accept: text/event-stream" -H "Content-Type: application/json" -d '{"message":"How is my tech exposure?"}' http://127.0.0.1:8000/v1/chat/stream`
+
+Следующий шаг:
+- Прогнать приложение на iOS Simulator или реальном iPhone против локального backend и записать Loom walkthrough.

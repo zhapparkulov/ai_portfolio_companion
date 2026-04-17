@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/insights/data/datasources/insights_datasource.dart';
 import '../../features/insights/data/datasources/insights_remote_datasource.dart';
 import '../../features/insights/data/repositories/insights_repository_impl.dart';
 import '../../features/insights/domain/repositories/insights_repository.dart';
@@ -28,7 +27,8 @@ Future<void> configureDependencies() async {
   // Shared Preferences (Storage)
   final prefs = await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPreferences>(() => prefs);
-  sl.registerLazySingleton<LocaleStorage>(() => LocaleStorage(sl<SharedPreferences>()));
+  sl.registerLazySingleton<LocaleStorage>(
+      () => LocaleStorage(sl<SharedPreferences>()));
 
   // Network
   sl.registerLazySingleton<Dio>(DioClient.create);

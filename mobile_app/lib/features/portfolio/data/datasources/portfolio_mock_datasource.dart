@@ -7,6 +7,7 @@ import 'portfolio_datasource.dart';
 /// `GET /v1/portfolio` in docs/ARCHITECTURE.md §6, so when the real
 /// data source lands the repository will not change.
 class PortfolioMockDataSource implements PortfolioDataSource {
+  @override
   Future<PortfolioModel> fetchPortfolio() async {
     // Simulate network latency so the UI loading state is exercised.
     await Future.delayed(const Duration(milliseconds: 600));

@@ -1,17 +1,77 @@
-# ai_portfolio_companion
+# Mobile App
 
-A new Flutter project.
+Flutter-клиент для AI Portfolio Companion.
 
-## Getting Started
+Приложение следует feature-based Clean Architecture из
+[`../docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md):
 
-This project is a starting point for a Flutter application.
+```text
+lib/
+├── core/       # config, DI, network, router/theme/utils
+├── features/   # portfolio, chat, insights
+└── shared/     # общие widgets/extensions/localization helpers
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Фичи
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- `portfolio` — dashboard, holdings list, loading/error/success states.
+- `chat` — message list, input, SSE streaming response.
+- `insights` — AI insight cards, severity/highlight/actions metadata.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## API
+
+Base URL задается через `API_BASE_URL`:
+
+```dart
+const String.fromEnvironment(
+  'API_BASE_URL',
+  defaultValue: 'http://127.0.0.1:8000/v1',
+);
+```
+
+Ожидаемые backend endpoint'ы:
+
+- `GET /v1/portfolio`
+- `POST /v1/chat/stream`
+- `GET /v1/insights`
+
+## Запуск локально
+
+Сначала подними backend:
+
+```bash
+cd ../backend
+.venv/bin/uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Потом запусти Flutter:
+
+```bash
+cd ../mobile_app
+flutter pub get
+flutter run
+```
+
+Для реального устройства используй IP компьютера в локальной сети:
+
+```bash
+flutter run --dart-define=API_BASE_URL=http://YOUR_LOCAL_IP:8000/v1
+```
+
+## Проверки
+
+```bash
+flutter analyze
+flutter test
+```
+
+## iOS
+
+Deployment target проекта синхронизирован на `13.0`. Если pods нужно пересобрать:
+
+```bash
+cd ios
+pod install
+```
+
+После этого можно запускать приложение на iOS Simulator или подключенном iPhone.

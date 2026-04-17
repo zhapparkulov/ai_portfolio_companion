@@ -51,5 +51,18 @@ flutter run --dart-define=API_BASE_URL=http://YOUR_LOCAL_IP:8000/v1
 
 ```bash
 cd backend
-pytest
+.venv/bin/python -m pytest tests
+```
+
+## Быстрая проверка контрактов
+
+```bash
+curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/v1/portfolio
+curl http://127.0.0.1:8000/v1/insights
+curl -N \
+  -H "Accept: text/event-stream" \
+  -H "Content-Type: application/json" \
+  -d '{"message":"How is my tech exposure?"}' \
+  http://127.0.0.1:8000/v1/chat/stream
 ```

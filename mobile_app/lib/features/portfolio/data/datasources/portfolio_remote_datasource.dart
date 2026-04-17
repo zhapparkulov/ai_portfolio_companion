@@ -10,6 +10,7 @@ class PortfolioRemoteDataSource implements PortfolioDataSource {
 
   const PortfolioRemoteDataSource(this._dio);
 
+  @override
   Future<PortfolioModel> fetchPortfolio() async {
     try {
       final response = await _dio.get(ApiEndpoints.portfolio);
