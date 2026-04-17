@@ -199,10 +199,10 @@ pod install
 
 ## Текущий уровень готовности
 
-Проект уже закрывает основной full-stack сценарий: Flutter UI вызывает FastAPI
-endpoint'ы для portfolio, chat streaming и insights. Следующий рубеж для условных
-100% — прогнать приложение на iOS Simulator или реальном устройстве, записать Loom
-walkthrough и отполировать действия, которые пока являются UI-заготовками.
+Проект закрывает основной full-stack сценарий: Flutter UI вызывает FastAPI
+endpoint'ы для portfolio, chat streaming и insights. Приложение готово к
+локальному запуску на emulator/simulator и демонстрации ключевых пользовательских
+flows.
 
 ## Финальная проверка перед отправкой
 

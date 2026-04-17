@@ -252,3 +252,30 @@
 
 Следующий шаг:
 - Перед Loom сделать один сухой прогон: backend start, `flutter run`, portfolio/chat/insights/manual button pass.
+
+## 2026-04-17 — Widget tests для ключевых UI flows
+
+Что сделано:
+- Добавлен Portfolio widget test: проверяет dashboard loaded state, total balance, holdings и форматирование значений.
+- Добавлен Chat widget test: переключается на chat tab, вводит сообщение, нажимает send и проверяет streamed assistant answer.
+- Добавлен Insights widget test: переключается на insights tab, проверяет insight card и coming soon SnackBar на action button.
+- Добавлен language switcher smoke test: переключает EN -> RU и проверяет русские тексты на главном экране.
+- Root README обновлен: убрана формулировка про Loom/UI-заготовки, текущий статус описан как готовый к локальному запуску и демонстрации.
+
+Затронутые области:
+- `mobile_app/test/widget_test.dart`
+- `README.md`
+- `.codex/changes.md`
+
+Решения:
+- Не добавлять хрупкий `integration_test`, завязанный на живой backend; вместо этого закрыть критичные UI flows через widget tests с fake DI.
+- `AIPortfolioApp` тестируется целиком через tabs, localization и реальные pages, а сетевые use cases подменяются fake repositories.
+
+Проверки:
+- `dart format mobile_app/test/widget_test.dart`
+- `flutter analyze`
+- `flutter test` — 23 passed
+- `.venv/bin/python -m pytest tests` — 5 passed
+
+Следующий шаг:
+- Перед записью демо пройти тот же сценарий руками на emulator/simulator с живым backend.
