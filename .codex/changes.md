@@ -229,3 +229,26 @@
 
 Следующий шаг:
 - Руками проверить в приложении: русский prompt должен вернуть русский streaming answer, английский prompt — английский.
+
+## 2026-04-17 — Финальный repo hygiene перед демо
+
+Что сделано:
+- Добавлен корневой `.gitignore` для `.DS_Store`.
+- Три уже отслеживаемых `.DS_Store` удалены из git index через `git rm --cached`.
+- Root README пройден как fresh-start инструкция и дополнен требованиями, быстрым стартом с нуля и финальными командами проверки.
+
+Затронутые области:
+- `.gitignore`
+- `README.md`
+- `.DS_Store` entries в git index
+
+Решения:
+- Не удалять локальные `.DS_Store` с диска, а только убрать их из version control.
+- Корневой `.gitignore` защищает все подпапки репозитория от повторного попадания macOS metadata.
+
+Проверки:
+- `git ls-files | rg '(^|/)\\.DS_Store$'`
+- `git status --short`
+
+Следующий шаг:
+- Перед Loom сделать один сухой прогон: backend start, `flutter run`, portfolio/chat/insights/manual button pass.

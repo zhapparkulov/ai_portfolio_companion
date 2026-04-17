@@ -38,6 +38,46 @@ ai_portfolio_companion/
 4. [`.codex/CODEX.md`](./.codex/CODEX.md) — рабочие правила Codex.
 5. [`.codex/changes.md`](./.codex/changes.md) — журнал изменений и проверок.
 
+## Требования
+
+- Flutter SDK с настроенным Android Emulator или iOS Simulator.
+- Python 3.9+.
+- CocoaPods для iOS запуска.
+- Android Studio или Xcode, если запускаешь на emulator/simulator.
+
+## Быстрый старт с нуля
+
+1. Установи backend dependencies:
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+2. Запусти backend:
+
+```bash
+.venv/bin/uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+3. В новом терминале установи Flutter dependencies:
+
+```bash
+cd mobile_app
+flutter pub get
+```
+
+4. Запусти приложение:
+
+```bash
+flutter run
+```
+
+На iOS Simulator приложение использует `http://127.0.0.1:8000/v1`.
+На Android Emulator приложение использует `http://10.0.2.2:8000/v1`.
+
 ## Backend
 
 ### Установка
@@ -163,3 +203,18 @@ pod install
 endpoint'ы для portfolio, chat streaming и insights. Следующий рубеж для условных
 100% — прогнать приложение на iOS Simulator или реальном устройстве, записать Loom
 walkthrough и отполировать действия, которые пока являются UI-заготовками.
+
+## Финальная проверка перед отправкой
+
+```bash
+cd backend
+.venv/bin/python -m pytest tests
+```
+
+```bash
+cd mobile_app
+flutter analyze
+flutter test
+```
+
+Во время демо backend должен быть запущен на `0.0.0.0:8000`.
