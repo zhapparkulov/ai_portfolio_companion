@@ -206,3 +206,26 @@
 
 Следующий шаг:
 - Позже можно очистить `.claude/mcp-server.md` от дублирующегося transcript и оставить только reusable prompts.
+
+## 2026-04-17 — Русские ответы для chat mock AI
+
+Что сделано:
+- `ChatService` теперь определяет язык сообщения по кириллице.
+- Для каждого chat intent добавлен русский response bank: 11 intent'ов по 5 вариантов, всего 55 русских ответов.
+- Английский response bank сохранен на том же уровне: 55 вариантов.
+- SSE contract не менялся: Flutter по-прежнему получает `data: {"chunk": ...}` и `data: {"done": true}`.
+- Добавлен backend test на русский вопрос и русские streaming chunks.
+
+Затронутые области:
+- `backend/app/services/chat_service.py`
+- `backend/tests/test_chat.py`
+
+Решения:
+- Не добавлять новый параметр языка в API: язык определяется из текста пользователя, чтобы Flutter ничего не менял.
+- Оставить mock AI без provider API key, но сделать ответы bilingual для демо RU/EN.
+
+Проверки:
+- `.venv/bin/python -m pytest tests`
+
+Следующий шаг:
+- Руками проверить в приложении: русский prompt должен вернуть русский streaming answer, английский prompt — английский.
