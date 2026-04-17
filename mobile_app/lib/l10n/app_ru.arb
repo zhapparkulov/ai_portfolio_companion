@@ -2,6 +2,7 @@
   "@@locale": "ru",
   "appTitle": "AI Portfolio Companion",
   "notificationsTooltip": "Уведомления",
+  "featureInDevelopment": "Функция в стадии разработки. Скоро появится.",
   "portfolioTab": "ПОРТФЕЛЬ",
   "chatTab": "ЧАТ",
   "insightsTab": "ИНСАЙТЫ",

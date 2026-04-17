@@ -7,6 +7,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_scaffold.dart';
+import '../../../../shared/widgets/coming_soon_snackbar.dart';
 import '../../../../shared/widgets/empty_state.dart';
 import '../../../../shared/widgets/error_view.dart';
 import '../../../../shared/widgets/language_switcher.dart';
@@ -43,7 +44,7 @@ class PortfolioPage extends StatelessWidget {
         ),
         IconButton(
           tooltip: context.l10n.notificationsTooltip,
-          onPressed: () {},
+          onPressed: () => showComingSoonSnackBar(context),
           icon: const Icon(Icons.notifications_none, size: 22),
         ),
       ],
@@ -72,7 +73,7 @@ class PortfolioPage extends StatelessWidget {
                   _SectionHeader(
                     title: context.l10n.yourHoldings,
                     actionLabel: context.l10n.viewAll,
-                    onAction: () {},
+                    onAction: () => showComingSoonSnackBar(context),
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   if (portfolio.holdings.isEmpty)

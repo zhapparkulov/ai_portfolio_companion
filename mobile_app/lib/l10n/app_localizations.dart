@@ -110,6 +110,12 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get notificationsTooltip;
 
+  /// No description provided for @featureInDevelopment.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature is in development and coming soon.'**
+  String get featureInDevelopment;
+
   /// No description provided for @portfolioTab.
   ///
   /// In en, this message translates to:

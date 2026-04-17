@@ -15,6 +15,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notificationsTooltip => 'Notifications';
 
   @override
+  String get featureInDevelopment =>
+      'This feature is in development and coming soon.';
+
+  @override
   String get portfolioTab => 'PORTFOLIO';
 
   @override

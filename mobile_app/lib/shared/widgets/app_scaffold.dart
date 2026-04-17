@@ -4,6 +4,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../extensions/l10n_extensions.dart';
+import 'coming_soon_snackbar.dart';
 
 enum AppTab { portfolio, chat, insights }
 
@@ -133,7 +134,7 @@ class _AppHeader extends StatelessWidget {
           if (actions.isEmpty)
             IconButton(
               tooltip: context.l10n.notificationsTooltip,
-              onPressed: () {},
+              onPressed: () => showComingSoonSnackBar(context),
               icon: const Icon(Icons.notifications_none, size: 22),
             )
           else

@@ -5,6 +5,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_scaffold.dart';
+import '../../../../shared/widgets/coming_soon_snackbar.dart';
 import '../../../../shared/widgets/empty_state.dart';
 import '../../../../shared/widgets/error_view.dart';
 import '../../../../shared/widgets/loading_view.dart';
@@ -87,12 +88,10 @@ class _InsightItem extends StatelessWidget {
             (action) => InsightActionButton(
               label: action.label,
               primary: action.primary,
-              onPressed: _noop,
+              onPressed: () => showComingSoonSnackBar(context),
             ),
           )
           .toList(),
     );
   }
 }
-
-void _noop() {}

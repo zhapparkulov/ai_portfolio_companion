@@ -7,6 +7,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/extensions/l10n_extensions.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
+import '../../../../shared/widgets/coming_soon_snackbar.dart';
 
 class DashboardInsightCard extends StatelessWidget {
   const DashboardInsightCard({super.key});
@@ -32,7 +33,7 @@ class DashboardInsightCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           AppButton(
             label: context.l10n.applyStrategy,
-            onPressed: () {},
+            onPressed: () => showComingSoonSnackBar(context),
             variant: AppButtonVariant.secondary,
             size: AppButtonSize.small,
           ),

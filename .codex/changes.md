@@ -157,3 +157,52 @@
 
 Следующий шаг:
 - Запустить Android emulator с поднятым backend и проверить portfolio/chat/insights в UI.
+
+## 2026-04-17 — Coming soon feedback для статичных кнопок
+
+Что сделано:
+- Добавлен общий `showComingSoonSnackBar` для lightweight feedback на еще не реализованные действия.
+- Все пустые `onPressed: () {}` и `_noop` в `mobile_app/lib` заменены на SnackBar.
+- Добавлена локализация `featureInDevelopment` для RU/EN.
+- Обновлены generated l10n файлы через `flutter gen-l10n`.
+
+Затронутые области:
+- `mobile_app/lib/shared/widgets/coming_soon_snackbar.dart`
+- `mobile_app/lib/shared/widgets/app_scaffold.dart`
+- `mobile_app/lib/features/portfolio/presentation/pages/portfolio_page.dart`
+- `mobile_app/lib/features/portfolio/presentation/widgets/dashboard_insight_card.dart`
+- `mobile_app/lib/features/chat/presentation/widgets/message_bubble.dart`
+- `mobile_app/lib/features/insights/presentation/pages/insights_page.dart`
+- `mobile_app/lib/l10n/**`
+
+Решения:
+- Не добавлять фиктивную business logic для trading/notifications.
+- Для демо каждая кнопка теперь дает честный feedback: функция в разработке и скоро появится.
+
+Проверки:
+- `rg "onPressed: \\(\\) \\{\\}|_noop|onPressed: _noop" mobile_app/lib -n`
+- `flutter gen-l10n`
+- `dart format mobile_app/lib mobile_app/test`
+- `flutter analyze`
+- `flutter test`
+
+Следующий шаг:
+- На emulator/device пройти руками все кнопки и убедиться, что SnackBar не перекрывает важный UI.
+
+## 2026-04-17 — Уточнен Stitch MCP onboarding
+
+Что сделано:
+- В начало `.claude/mcp-server.md` добавлены шаги подключения Stitch UI MCP через терминал Claude Code.
+- Описан порядок: открыть `claude`, взять ключ со страницы Stitch UI, вставить ключ в терминал, проверить `/mcp`, затем использовать команды из документа.
+
+Затронутые области:
+- `.claude/mcp-server.md`
+
+Решения:
+- Не переписывать существующий transcript/команды, а добавить onboarding-блок сверху как быстрый вход.
+
+Проверки:
+- Документационное изменение, тесты не запускались.
+
+Следующий шаг:
+- Позже можно очистить `.claude/mcp-server.md` от дублирующегося transcript и оставить только reusable prompts.
