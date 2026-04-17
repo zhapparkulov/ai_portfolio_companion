@@ -1,6 +1,17 @@
+import 'package:flutter/foundation.dart';
+
 class AppConfig {
-  static const apiBaseUrl = String.fromEnvironment(
-    'API_BASE_URL',
-    defaultValue: 'http://127.0.0.1:8000/v1',
-  );
+  static const _apiBaseUrlOverride = String.fromEnvironment('API_BASE_URL');
+
+  static String get apiBaseUrl {
+    if (_apiBaseUrlOverride.isNotEmpty) {
+      return _apiBaseUrlOverride;
+    }
+
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      return 'http://10.0.2.2:8000/v1';
+    }
+
+    return 'http://127.0.0.1:8000/v1';
+  }
 }

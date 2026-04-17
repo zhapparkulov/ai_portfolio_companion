@@ -131,3 +131,29 @@
 
 Следующий шаг:
 - Прогнать приложение на iOS Simulator или реальном iPhone против локального backend и записать Loom walkthrough.
+
+## 2026-04-17 — Android локальный backend fix
+
+Что сделано:
+- Обновлен `AppConfig`: без `API_BASE_URL` Android emulator теперь использует `http://10.0.2.2:8000/v1`, остальные платформы — `http://127.0.0.1:8000/v1`.
+- В Android main manifest добавлен `INTERNET` permission для всех build modes.
+- В Android main manifest включен `android:usesCleartextTraffic="true"` для локального HTTP backend.
+- README дополнен пояснением про Android emulator, `10.0.2.2` и override через `API_BASE_URL`.
+
+Затронутые области:
+- `mobile_app/lib/core/config/app_config.dart`
+- `mobile_app/android/app/src/main/AndroidManifest.xml`
+- `README.md`
+- `mobile_app/README.md`
+
+Решения:
+- Не менять общий backend URL на Android-only значение: iOS Simulator продолжает работать через `127.0.0.1`.
+- Для физического Android телефона оставить явный `--dart-define=API_BASE_URL=http://YOUR_LOCAL_IP:8000/v1`.
+
+Проверки:
+- `dart format mobile_app/lib/core/config/app_config.dart`
+- `flutter analyze`
+- `flutter test`
+
+Следующий шаг:
+- Запустить Android emulator с поднятым backend и проверить portfolio/chat/insights в UI.

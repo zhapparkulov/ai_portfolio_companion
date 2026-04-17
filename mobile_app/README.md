@@ -23,11 +23,13 @@ lib/
 Base URL задается через `API_BASE_URL`:
 
 ```dart
-const String.fromEnvironment(
-  'API_BASE_URL',
-  defaultValue: 'http://127.0.0.1:8000/v1',
-);
+const String.fromEnvironment('API_BASE_URL');
 ```
+
+Если override не передан, приложение использует:
+
+- iOS Simulator: `http://127.0.0.1:8000/v1`
+- Android Emulator: `http://10.0.2.2:8000/v1`
 
 Ожидаемые backend endpoint'ы:
 
@@ -57,6 +59,9 @@ flutter run
 ```bash
 flutter run --dart-define=API_BASE_URL=http://YOUR_LOCAL_IP:8000/v1
 ```
+
+Важно для Android: `127.0.0.1` внутри emulator означает сам emulator. Для
+эмулятора используй `10.0.2.2`, для физического телефона — IP компьютера.
 
 ## Проверки
 
